@@ -78,6 +78,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 		               //  List<String> farmerno= (List<String>) request.getAttribute("farmerNo");
 		                // out.println("== "+farmerno);
 						List<MarketArrivalModel> allmarketArrivalList = (List<MarketArrivalModel>) request.getAttribute("marketArrivalList");	
+						System.out.print(allmarketArrivalList + " DaTa");
 						
 				%>
 			 <div class="page-content fade-in-up">

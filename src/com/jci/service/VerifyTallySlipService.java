@@ -24,4 +24,5 @@ public interface VerifyTallySlipService {
 	public List<VerifyTallySlip> getAllforRM(String status, String region_zone);
 	public String getEmailby_tally(String tnoemail);
 	public List<VerifyTallySlip> getAllforZM(String string, String region_zone);
+	public void setholdstatus(String tno);
 }

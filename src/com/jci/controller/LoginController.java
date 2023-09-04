@@ -1,4 +1,7 @@
 package com.jci.controller;
+
+import java.sql.Connection;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -21,88 +24,99 @@ public class LoginController {
 	UserRegistrationService userRegService;
 
 	@RequestMapping("index")
-	public ModelAndView login(HttpServletRequest request){
+	public ModelAndView login(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("index");
-	
+
 		return mv;
 	}
 
 	@RequestMapping("login")
-	public ModelAndView loginDetails(HttpServletRequest request){
+	public ModelAndView loginDetails(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
-	
-	
-	  @RequestMapping("dashboardview") 
-	  public ModelAndView dashboardview(HttpServletRequest request){ 
-		//  System.out.println("dashboard"); 
-			String username =(String)request.getSession().getAttribute("usrname");
-		  ModelAndView mv = new ModelAndView("dashboard");
-		  if(username == null) {
-          	mv = new ModelAndView("index");
-              }
-		  return mv; 
-		  }
-	 
 
-	  @RequestMapping("loginAction")
-      public ModelAndView loginDetailsCheck(HttpServletRequest request, RedirectAttributes redirectAttributes, HttpSession session){
-            ModelAndView mv = new ModelAndView("index");
-            
-            try {
-                   String email =  request.getParameter("email");
-                   String password = request.getParameter("password");
-                   if(email != null && password != null) {
-                   String dpcId = request.getParameter("dpcId");
-                   String ifExist =  userRegService.checkLogin(email, password);
-                   String username =(String)request.getSession().getAttribute("usrname");
-                     if(ifExist!=null && ifExist.equalsIgnoreCase("mobile")) { 
-                           mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Mobile User Can not Login Here.</div> \r\n");
-                     
-                     } else if(ifExist == null){
-                     
-                     mv.addObject("msg", "<div class=\"alert alert-danger\"><b>Failure !</b>Please Enter correct username and password.</div> \r\n"); 
-                     }
-                   
-                     else
-                         {
+	@RequestMapping("dashboardview")
+	public ModelAndView dashboardview(HttpServletRequest request) {
+		// System.out.println("dashboard");
+		String username = (String) request.getSession().getAttribute("usrname");
+		ModelAndView mv = new ModelAndView("dashboard");
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
+		return mv;
+	}
 
-                                int refId = userRegService.getRefId(email);
-                                int roleId = userRegService.getUserRoleId(refId);
-                                String rolename = userRegService.getUserId(refId);
-                                String dpcIdd = userRegService.getUserDpc(refId);
-                                String region = userRegService.getUserRegion(refId);
-                                String dpc_center = userRegService.getdpc_center(dpcIdd);
-                                int is_ho = userRegService.getis_ho(email);
-                                String roletype = userRegService.getroletypr(email);
-                                String regionId = userRegService.getregionId(email);
-                                String zoneId = userRegService.getzoneId(email);
+	@RequestMapping("loginAction")
+	public ModelAndView loginDetailsCheck(HttpServletRequest request, RedirectAttributes redirectAttributes,
+			HttpSession session) {
+		ModelAndView mv = new ModelAndView("index");
 
-                                session.setAttribute("regionId", regionId);
-                                session.setAttribute("zoneId", zoneId);
-                                session.setAttribute("roletype", roletype);
-                                session.setAttribute("is_ho", is_ho);
-                                session.setAttribute("userId", refId);
-                                session.setAttribute("usrname", email);
-                                session.setAttribute("dpcId", dpcIdd);
-                                session.setAttribute("region", region);
-                                session.setAttribute("zone", dpcId);
-                                session.setAttribute("roleId", roleId);
-                                session.setAttribute("refId", refId);
-                                session.setAttribute("rolename", rolename);
-                                session.setAttribute("dpc_center", dpc_center);
-                                
-                                  mv= new ModelAndView( (View)new RedirectView("dashboardview.obj")); 
-                                 
-                         }
-                         
-                   }        
-                     
+//		try {
+//			Connection connection = configtest.getConnection();
+//		
+//			System.out.println(connection);
+//		}catch (Exception e) {
+//			
+//			System.out.println(e.getLocalizedMessage());
+//		}
+		 
+		try {
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			
+			
+			
+			if (email != null && password != null) {
+				String dpcId = request.getParameter("dpcId");
+				String ifExist = userRegService.checkLogin(email, password);
+				String username = (String) request.getSession().getAttribute("usrname");
+				if (ifExist != null && ifExist.equalsIgnoreCase("mobile")) {
+					mv.addObject("msg",
+							"<div class=\"alert alert-danger\"><b>Failure !</b>Mobile User Can not Login Here.</div> \r\n");
 
-            }catch(Exception e) {
-                   System.out.println(e);
-            }
-            return mv;
-      }
+				} else if (ifExist == null) {
+
+					mv.addObject("msg",
+							"<div class=\"alert alert-danger\"><b>Failure !</b>Please Enter correct username and password.</div> \r\n");
+				}
+
+				else {
+
+					int refId = userRegService.getRefId(email);
+					int roleId = userRegService.getUserRoleId(refId);
+					String rolename = userRegService.getUserId(refId);
+					String dpcIdd = userRegService.getUserDpc(refId);
+					String region = userRegService.getUserRegion(refId);
+					String dpc_center = userRegService.getdpc_center(dpcIdd);
+					int is_ho = userRegService.getis_ho(email);
+					String roletype = userRegService.getroletypr(email);
+					String regionId = userRegService.getregionId(email);
+					String zoneId = userRegService.getzoneId(email);
+
+					session.setAttribute("regionId", regionId);
+					session.setAttribute("zoneId", zoneId);
+					session.setAttribute("roletype", roletype);
+					session.setAttribute("is_ho", is_ho);
+					session.setAttribute("userId", refId);
+					session.setAttribute("usrname", email);
+					session.setAttribute("dpcId", dpcIdd);
+					session.setAttribute("region", region);
+					session.setAttribute("zone", dpcId);
+					session.setAttribute("roleId", roleId);
+					session.setAttribute("refId", refId);
+					session.setAttribute("rolename", rolename);
+					session.setAttribute("dpc_center", dpc_center);
+
+					mv = new ModelAndView((View) new RedirectView("dashboardview.obj"));
+
+				}
+
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return mv;
+	}
 }

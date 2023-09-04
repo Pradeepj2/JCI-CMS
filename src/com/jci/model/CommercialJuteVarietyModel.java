@@ -8,79 +8,76 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="jcijutepricesforcommercial", schema="dbo")
+@Table(name = "jcijutepricesforcommercial", schema = "dbo")
 public class CommercialJuteVarietyModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private int id;
 
-	@Column(name="regionid")
+	@Column(name = "regionid")
 	private String region;
 
-	@Column(name="cprice")
+	@Column(name = "cprice")
 	private String cprice;
 
-	@Column(name="effectDate")
+	@Column(name = "effectDate")
 	private String effectDate;
 
-	@Column(name="formtype")
+	@Column(name = "formtype")
 	private String formtype;
 
-	@Column(name="cqty")
+	@Column(name = "cqty")
 	private String cqty;
 
-	@Column(name="dpc")
+	@Column(name = "dpc")
 	private String dpc;
 
-	@Column(name="crop_yr")
+	@Column(name = "crop_yr")
 	private String crop_yr;
 
-	@Column(name="jute_variety")
+	@Column(name = "jute_variety")
 	private String jute_variety;
 
-	@Column(name="grade1")
+	@Column(name = "grade1")
 	private double grade1;
 
-	@Column(name="grade2")
+	@Column(name = "grade2")
 	private double grade2;
 
-	@Column(name="grade3")
+	@Column(name = "grade3")
 	private double grade3;
 
-	@Column(name="grade4")
+	@Column(name = "grade4")
 	private double grade4;
 
-	@Column(name="grade5")
+	@Column(name = "grade5")
 	private double grade5;
 
-	@Column(name="grade6")
+	@Column(name = "grade6")
 	private double grade6;
 
-	@Column(name="grade7")
+	@Column(name = "grade7")
 	private double grade7;
 
-	@Column(name="grade8")
+	@Column(name = "grade8")
 	private double grade8;
 
-	@Column(name="status")
+	@Column(name = "status")
 	private int status;
 
-	@Column(name="created_on")
-	private  String created_on;
+	@Column(name = "created_on")
+	private String created_on;
 
-	@Column(name="created_by")
+	@Column(name = "created_by")
 	private String created_by;
 
-	@Column(name="zone")
+	@Column(name = "zone")
 	private String zone;
 
-	@Column(name="dpcname")
+	@Column(name = "dpcname")
 	private String dpcname;
-
-
-
 
 	public String getDpcname() {
 		return dpcname;
@@ -234,8 +231,6 @@ public class CommercialJuteVarietyModel {
 		this.status = status;
 	}
 
-
-
 	public String getCreated_on() {
 		return created_on;
 	}
@@ -251,7 +246,6 @@ public class CommercialJuteVarietyModel {
 	public void setCreated_by(String created_by) {
 		this.created_by = created_by;
 	}
-
 
 	public CommercialJuteVarietyModel() {
 
@@ -274,9 +268,5 @@ public class CommercialJuteVarietyModel {
 				+ ", grade8=" + grade8 + ", status=" + status + ", created_on=" + created_on + ", created_by="
 				+ created_by + ", zone=" + zone + "]";
 	}
-
-
-
-
 
 }

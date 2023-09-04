@@ -86,7 +86,7 @@ public class PcsoentryDaoImpl implements PcsoentryDao{
 		List<PcsoDateModel> ll = new ArrayList<>();
 		List<Object[]> rows = new ArrayList<>();
 		 
-		String querystr = "select  mill_name, mill_code,Sum(total_allocation) as total, allocation = cast(  STUFF((Select ',' + CONVERT(varchar(110),total_allocation,250) from [XMWJCI].[dbo].[jcientryofpcso] b where b.mill_code =  a.mill_code and b.pcso_date in ("+pcso1+") for XML PATH ('')),1,1,'' ) as varchar(110))  from  [XMWJCI].[dbo].[jcientryofpcso] a where a.pcso_date in("+pcso1+") group by a.mill_name, a.mill_code";
+		String querystr = "select  mill_name, mill_code,Sum(total_allocation) as total, allocation = cast(  STUFF((Select ',' + CONVERT(varchar(110),total_allocation,250) from [JCI_DB].[dbo].[jcientryofpcso] b where b.mill_code =  a.mill_code and b.pcso_date in ("+pcso1+") for XML PATH ('')),1,1,'' ) as varchar(110))  from  [JCI_DB].[dbo].[jcientryofpcso] a where a.pcso_date in("+pcso1+") group by a.mill_name, a.mill_code";
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);

@@ -69,7 +69,7 @@ public class DistributionoftallyslipDaoImpl implements DistributionoftallyslipDa
 		String querystr = "";
 		/*String roletypes = (String) session1.getAttribute("roletype");
 		if(roletypes.equalsIgnoreCase("HO")){
-	querystr = "  SELECT pur.centername,bale.* FROM XMWJCI.dbo.jcislip bale left join XMWJCI.dbo.jcipurchasecenter pur on bale.dpccode = pur.CENTER_CODE;";
+	   querystr = "  SELECT pur.centername,bale.* FROM JCI_DB.dbo.jcislip bale left join JCI_DB.dbo.jcipurchasecenter pur on bale.dpccode = pur.CENTER_CODE;";
 		}*/
 		/*
 		 * else if(roletypes.equalsIgnoreCase("ZO")) { querystr = ""; } else
@@ -77,7 +77,7 @@ public class DistributionoftallyslipDaoImpl implements DistributionoftallyslipDa
 		 */
 		
 		/* else { */
-			querystr = "SELECT pur.centername,bale.* FROM XMWJCI.dbo.jcislip bale left join XMWJCI.dbo.jcipurchasecenter pur on bale.dpccode = pur.CENTER_CODE where bale.dpccode = '"+dpcId+"'";
+			querystr = "SELECT pur.centername,bale.* FROM JCI_DB.dbo.jcislip bale left join JCI_DB.dbo.jcipurchasecenter pur on bale.dpccode = pur.CENTER_CODE where bale.dpccode = '"+dpcId+"'";
 		/* } */
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();

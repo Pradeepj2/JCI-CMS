@@ -3,8 +3,10 @@ package com.jci.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,8 +58,10 @@ public class EntryDerivativePriceDaoImpl implements EntryDerivativePriceDao {
 
 	@Override
 	public List<EntryDerivativePrice> getAllEDP() {
-		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(EntryDerivativePrice.class);
-		List<EntryDerivativePrice> ll = c.list();
+		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(EntryDerivativePrice.class).addOrder(Order.desc("creation_date"));
+ String sqlString ="select * from jcientry_derivative_price";
+     Query query =  this.currentSession().createSQLQuery(sqlString);	
+      List<EntryDerivativePrice> ll = c.list();
 		return ll;
 	}
 

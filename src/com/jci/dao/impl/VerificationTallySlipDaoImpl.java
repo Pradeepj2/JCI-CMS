@@ -427,4 +427,15 @@ public class VerificationTallySlipDaoImpl implements VerificationTallySlipDao {
 		}
 	}
 
+	@Override
+	public void setholdstatus(String tno) {
+		// TODO Auto-generated method stub
+		try {
+			String hql = "update verificationtallyslip set status = 'hold' where tallyNo ='"+tno+"'";
+			this.sessionFactory.getCurrentSession().createSQLQuery(hql).executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+
 }

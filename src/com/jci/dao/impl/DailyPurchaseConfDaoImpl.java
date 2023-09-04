@@ -346,7 +346,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 	@Override
 	public void firstLevel(String cropyr, String basis) {
 		String querystr="";
-		 querystr = "select sum(a.grade1 + a.grade2 + a.grade3 + a.grade4 + a.grade5 + a.grade6+a.grade7+a.grade8) - sum(b.bale_no) FROM [XMWJCI].[dbo].[jciprocurement] a join [XMWJCI].[dbo].[jcibalepreparation] b on a.basis = b.basis where a.basis = '"+basis+"' and a.cropyr ='"+cropyr+"'"; 	
+		 querystr = "select sum(a.grade1 + a.grade2 + a.grade3 + a.grade4 + a.grade5 + a.grade6+a.grade7+a.grade8) - sum(b.bale_no) FROM [JCI_DB].[dbo].[jciprocurement] a join [JCI_DB].[dbo].[jcibalepreparation] b on a.basis = b.basis where a.basis = '"+basis+"' and a.cropyr ='"+cropyr+"'"; 	
 		Session session = sessionFactory.getCurrentSession();
 		Transaction tx = session.beginTransaction();
 		SQLQuery query = session.createSQLQuery(querystr);
@@ -354,7 +354,7 @@ public class DailyPurchaseConfDaoImpl implements DailyPurchaseConfDao{
 		 System.out.println("loose jute        ==============        "+result);
 		 
 		 String querystr1="";
-		 querystr1 = "select jutevariety, sum(grade1) as grade1, sum(grade2) as grade2, sum(grade3) as grade3, sum(grade4) as grade4, sum(grade5) as grade5, sum(grade6) as grade6, sum(grade7) as grade7, sum(grade8) as grade8 FROM [XMWJCI].[dbo].[jciprocurement] where basis = '"+basis+"' and cropyr ='"+cropyr+"' group by jutevariety ";
+		 querystr1 = "select jutevariety, sum(grade1) as grade1, sum(grade2) as grade2, sum(grade3) as grade3, sum(grade4) as grade4, sum(grade5) as grade5, sum(grade6) as grade6, sum(grade7) as grade7, sum(grade8) as grade8 FROM [JCI_DB].[dbo].[jciprocurement] where basis = '"+basis+"' and cropyr ='"+cropyr+"' group by jutevariety ";
 		Session session1 = sessionFactory.getCurrentSession();
 		Transaction tx1 = session1.beginTransaction();
 		SQLQuery query1 = session1.createSQLQuery(querystr1);

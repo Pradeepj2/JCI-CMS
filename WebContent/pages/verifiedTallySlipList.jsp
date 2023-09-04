@@ -87,6 +87,24 @@
 		 window.location.reload();
 	}
 	</script>
+	
+	 <script>
+	function paymentonhold(tallyno) {
+		//alert(tallyno);
+		
+		$.ajax({
+			type:"GET",
+			url:"setholdstatus.obj",
+			data:{"tallyno":tallyno},
+			success:function(result){
+				
+ 				   var data= jQuery.parseJSON(result);
+			}			
+		});
+		
+		 window.location.reload();
+	}
+	</script>
  <!-- ................Scripting........... -->
  
  
@@ -130,6 +148,7 @@
 									    <th>Purchase Date</th>
 									    <th>Net Quntity</th>
 										<th>Amount Payable</th>
+										<th> </th>
 							</tr>
 								</thead>
 								<tbody>
@@ -170,6 +189,7 @@
 										<td><%=verificationlists.getDop()%></td> 
 										<td><%=verificationlists.getNetquantity()%></td> 
 						                <td><%=verificationlists.getAmountpayable()%></td>
+									<td><button type="button" class="btn btn-danger btn-sm" onclick="paymentonhold('<%=verificationlists.getTallyNo()%>')">Hold</button></td>
 						              <!-- <td><a href="update_paymentstatus.obj?tallyno=<%=verificationlists.getTallyNo()%>" class="btn btn-danger btn-sm btn-block">Payment</a></td>
 						                 <td><a href="edittallyslip.obj?id=verificationlists.getTallyslipno()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>-->
 										<%-- <td><a onclick="return confirm('Are you sure you want to delete this item?');" href="deletetallyslip.obj?id=<%=verificationlists.getTallyNo()%>" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td> --%>

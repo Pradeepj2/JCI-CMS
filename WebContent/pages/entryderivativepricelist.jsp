@@ -86,11 +86,17 @@ $(document).ready(function() {
 										<th>Sl.No</th>
 										<th>Crop Year</th>
 										<th>Delivery Type</th>
-										<th>State</th>
+										<th>State Name</th>
 										<th>District</th>
-										<th>status</th>
-										<th>creation_date</th>
-										<th>jute_variety</th>
+										<th>Jute Variety</th>
+										<th>Grade 1</th>
+										<th>Grade 2</th>
+										<th>Grade 3</th>
+										<th>Grade 4</th>
+										<th>Grade 5</th>
+										<th>Grade 6</th>
+										
+										<th>Creation Date</th>
 						
 										
 										<th></th>
@@ -104,14 +110,19 @@ $(document).ready(function() {
 									%>
 									<tr>
 										<td><%=i%></td>
-									
 										<td><%=edpl.getCrop_year()%></td>
 										<td><%=edpl.getDelivery_type()%></td>
-				                    	<td><%=edpl.getState()%></td>
-										<td><%=edpl.getDistrict()%></td>
-										<td><%=edpl.getStatus()%></td>
-										<td><%=edpl.getCreation_date()%></td>
+				                    	<td><%=edpl.getState_name()%></td>
+										<td><%=edpl.getDistrict_name()%></td>
 										<td><%=edpl.getJute_variety()%></td>
+										<td><%=edpl.getGrade1()%></td>
+										<td><%=edpl.getGrade2()%></td>
+										<td><%=edpl.getGrade3()%></td>
+										<td><%=edpl.getGrade4()%></td>
+										<td><%=edpl.getGrade5()%></td>
+										<td><%=edpl.getGrade6()%></td>
+										
+										<td><%=edpl.getCreation_date()%></td>
 							 
 										<td><a href="editentryderivativeprice.obj?der_id=<%=edpl.getDer_id()%>" class="btn btn-warning btn-sm btn-block">  <i class="fa fa-pencil" aria-hidden="true" style="font-size: 15px;"></i></a></td>
 										<td><a onclick="return confirm('Are you sure you want to delete this item?');" href="entryderivativepriceDelete.obj?der_id=<%=edpl.getDer_id()%>" class="btn btn-danger btn-sm btn-block">  <i class="fa fa-trash" aria-hidden="true" style="font-size: 15px;"></i></a></td>
