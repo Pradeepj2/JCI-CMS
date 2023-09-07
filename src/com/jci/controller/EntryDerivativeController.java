@@ -4,6 +4,7 @@ import java.io.Console;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.hibernate.annotations.common.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.object.SqlQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,17 +25,25 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.google.protobuf.Timestamp;
 import com.jci.model.EntryDerivativePrice;
+import com.jci.model.EntryofGradeCompositionModel;
 import com.jci.model.StateList;
 import com.jci.service.DistrictService;
 import com.jci.service.EntryDeryvativePriceService;
+import com.jci.service.EntryofGradeCompositionService;
 import com.jci.service.StateService;
+
+import javassist.expr.NewArray;
 
 @Controller
 public class EntryDerivativeController {
 
 	@Autowired
 	private EntryDeryvativePriceService entryDerivativePriceService;
+	
+	@Autowired
+	EntryofGradeCompositionService entryofGradeCompositionService;
 
 	@Autowired
 	StateService stateList;
@@ -54,6 +64,19 @@ public class EntryDerivativeController {
 		if (username == null) {
 			mv = new ModelAndView("index");
 		}
+		return mv;
+	}
+	
+	
+	@RequestMapping("entry_gradecomposition")
+	public ModelAndView ViewGradeComposition(HttpServletRequest request) {
+		String username = (String) request.getSession().getAttribute("usrname");
+		ModelAndView mv = new ModelAndView("entryofgradecomposition");
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
+		List<Object[]> allJuteCombination = entryofGradeCompositionService.getAllJuteCombination();
+		mv.addObject("allJuteVariety", allJuteCombination);
 		return mv;
 	}
 
@@ -413,5 +436,52 @@ public class EntryDerivativeController {
 		
 		return  new ModelAndView(new RedirectView("entryderivativepricelist.obj"));
 	}
-
+	
+	
+	
+	@RequestMapping("saveGradeComp")
+	public ModelAndView saveGradeComposition(HttpServletRequest request) {
+		 
+		String username = (String) request.getSession().getAttribute("usrname");
+		ModelAndView mv = new ModelAndView("entryofgradecomposition");
+		if (username == null) {
+			mv = new ModelAndView("index");
+		}
+		
+		int size = 4;
+		
+		String lableName=request.getParameter("labelname");
+		String cropYear = request.getParameter("crop_year");
+		Double availableQty = Double.parseDouble(request.getParameter("available_qty"));
+		int refId = (Integer) request.getSession().getAttribute("userId");
+	
+        Date date = new Date();
+        
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY");
+        SimpleDateFormat simpleDateTimeFormat = new SimpleDateFormat("dd-MM-YYYY hh:mm:ss");
+        String creation_date = simpleDateFormat.format(date);
+        String creation_dateAndtime = simpleDateTimeFormat.format(date);
+        
+      
+		List<Integer> list = new ArrayList<Integer>();
+		
+		for(int i = 1 ; i <= size ; i++) {
+			
+			EntryofGradeCompositionModel entryofGradeCompositionModel = new EntryofGradeCompositionModel();
+			int grade = Integer.parseInt(request.getParameter("grade" + i));
+			entryofGradeCompositionModel.setJute_combination("TDN - 1 / WN - 1 / M -1 / B-1");
+			entryofGradeCompositionModel.setSystem_composition(i);
+			entryofGradeCompositionModel.setProposed_composition(grade + i);
+			entryofGradeCompositionModel.setCrop_year(cropYear);
+			entryofGradeCompositionModel.setAvailable_qty(availableQty);
+			entryofGradeCompositionModel.setLabel_name(lableName);
+			entryofGradeCompositionModel.setCreated_by(refId);
+			entryofGradeCompositionModel.setCreated_date(creation_date);
+			entryofGradeCompositionModel.setCreated_dateAndtime(creation_dateAndtime);
+			//List<Object> allJuteCombination = entryofGradeCompositionService.getAllJuteCombination();
+			entryofGradeCompositionService.create(entryofGradeCompositionModel);
+		}
+		
+		return mv;
+	}
 }

@@ -237,6 +237,10 @@ body {
 					<li data-pre="366" id="o366"><a href="entry_derivativeprice.obj"><i
 							class="sidebar-item-icon fa fa-th-large"></i><b>Entry of
 								Derivative Price</b></a></li>
+								
+					<li data-pre="367" id="o367"><a href="entry_gradecomposition.obj"><i
+							class="sidebar-item-icon fa fa-th-large"></i><b>Entry of
+								Grade Composition</b></a></li>
 					<li data-pre="37" id="o37"><a
 						href="entryderivativepricelist.obj"><i
 							class="sidebar-item-icon fa fa-th-large"></i><b>
